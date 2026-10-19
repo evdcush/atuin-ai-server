@@ -1,0 +1,27 @@
+name: atuin-local-ai-server
+
+services:
+  atuin-ai-server:
+    image: ghcr.io/atuinsh/atuin-ai-server:latest  #@sha256:ab059f33830d2441986833475c4b295b886e2c8e911a87642f51435856611ac4
+    container_name: atuin-ai-server
+    restart: unless-stopped
+    init: true
+    environment:
+      AUTH_TOKEN: ${ATUIN_AI_AUTH_TOKEN:?Set ATUIN_AI_AUTH_TOKEN in .env}
+    volumes:
+      - ./config.toml:/etc/atuin-ai/config.toml:ro
+    ports:
+      - "127.0.0.1:18080:8080"
+    networks:
+      - ai-backend
+    read_only: true
+    tmpfs:
+      - /tmp:size=64m,mode=1777
+    security_opt:
+      - no-new-privileges:true
+    cap_drop:
+      - ALL
+
+networks:
+  ai-backend:
+    external: true

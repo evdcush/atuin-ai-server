@@ -1,0 +1,13 @@
+port = 8080
+endpoint = "http://litellm:4000/v1"
+default_model = "swol-doge"
+
+[request.body]
+stream_options = { include_usage = true }
+
+[[models]]
+alias = "swol-doge"
+name = "Swol Doge"
+description = "Local tool-capable model routed through LiteLLM"
+model = "swol-doge"
+

@@ -1,0 +1,24 @@
+# daemon is necessary if u do atuin ai
+[daemon]
+enabled = true
+autostart = true
+
+[ai]
+enabled = true
+# NB: normally, endpoint would be localhost. but since i use atuin ai
+#     on other devices, using workdtation for inference, i set to tailnet:
+#     tailscale serve --bg --https=443 --set-path=/atuin-ai http://127.0.0.1:18080
+endpoint = "https://mytailnet.ts.net/atuin-ai"
+endpoint_protocol = "oss"
+api_token = "youneed this so ai can access your atuin stuff"
+model = "swol-doge"
+
+[ai.capabilities]
+enable_history_search = true
+enable_history_output = true
+enable_file_tools = true
+enable_command_execution = true
+
+[ai.opening]
+send_cwd = true
+send_last_command = true
